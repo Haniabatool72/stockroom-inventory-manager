@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple inventory management system built with HTML, CSS and vanilla JavaScript.">
+  <title>Stockroom – Inventory Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Stockroom</h1>
+    <p>Inventory Management System</p>
+  </header>
+
+  <main class="container">
+    <!-- Dashboard -->
+    <section class="stats" aria-label="Dashboard">
+      <div class="stat"><span class="stat-label">Total products</span><strong id="statProducts">0</strong></div>
+      <div class="stat"><span class="stat-label">Total units</span><strong id="statUnits">0</strong></div>
+      <div class="stat"><span class="stat-label">Stock value</span><strong id="statValue">$0.00</strong></div>
+      <div class="stat stat-warn"><span class="stat-label">Low stock</span><strong id="statLow">0</strong></div>
+    </section>
+
+    <div id="alertBanner" class="alert" role="alert" hidden></div>
+
+    <div class="layout">
+      <!-- Form -->
+      <section class="panel" aria-labelledby="formTitle">
+        <h2 id="formTitle">Add product</h2>
+        <form id="productForm" novalidate>
+          <input type="hidden" id="productId">
+
+          <label for="name">Product name</label>
+          <input type="text" id="name" maxlength="60" placeholder="e.g. Wireless mouse">
+          <small class="error" id="nameError"></small>
+
+          <label for="category">Category</label>
+          <input type="text" id="category" list="categoryList" maxlength="30" placeholder="e.g. Electronics">
+          <datalist id="categoryList"></datalist>
+          <small class="error" id="categoryError"></small>
+
+          <div class="row">
+            <div>
+              <label for="price">Price ($)</label>
+              <input type="number" id="price" min="0" step="0.01" placeholder="0.00">
+              <small class="error" id="priceError"></small>
+            </div>
+            <div>
+              <label for="stock">Stock quantity</label>
+              <input type="number" id="stock" min="0" step="1" placeholder="0">
+              <small class="error" id="stockError"></small>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary" id="submitBtn">Add product</button>
+            <button type="button" class="btn" id="cancelBtn" hidden>Cancel edit</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Product list -->
+      <section class="panel" aria-labelledby="listTitle">
+        <h2 id="listTitle">Products</h2>
+        <div class="filters">
+          <input type="search" id="search" placeholder="Search by name…" aria-label="Search products">
+          <select id="filterCategory" aria-label="Filter by category">
+            <option value="all">All categories</option>
+          </select>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Category</th><th class="num">Price</th><th class="num">Stock</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="productTable"></tbody>
+          </table>
+        </div>
+        <p id="emptyState" class="empty" hidden></p>
+      </section>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <footer class="footer">Developed by HANIA Batool</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
